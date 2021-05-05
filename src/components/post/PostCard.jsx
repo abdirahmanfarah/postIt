@@ -1,11 +1,22 @@
 import React from 'react'
+import styled from 'styled-components'
 
-const PostCard = () => {
+const PostCard = (props) => {
+    // console.log(props)
     return (
-        <div>
-            <h1> This is a postCard</h1>
-        </div>
+        <Postcard>
+
+            {/* <Post>{props.input}</Post> */}
+        </Postcard>
     )
 }
+
+const Post = styled.p`
+    font
+`
+
+const Postcard = styled.div`
+    background:tan;
+`
 
 export default PostCard
