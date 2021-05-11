@@ -23,6 +23,9 @@ const Posts = (props) => {
     e.preventDefault();
     setInput("")
     console.log(inputs)
+    if(!input.post || /^s*$/.test(input.post)){
+      return
+    }
 
     addInput(input)
   };
@@ -38,7 +41,9 @@ const Posts = (props) => {
   }
 
   const removeInput = id  => {
-    const removeInput = [...inputs].filter(x => x.id !== id)
+    // const removeInput = [...inputs].filter(x => x.id !== id)
+    const removeInput = [...inputs]
+    removeInput.splice(id, 1)
     setInputs(removeInput)
     console.log("button clicked", id)
   }
