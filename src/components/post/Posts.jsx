@@ -4,40 +4,58 @@ import styled from 'styled-components'
 
 
 const Posts = (props) => {
-  // const [newInput, setNewInput] = useState({
-  //   post: ''
-  // });
+  const [input, setInput] = useState({
+    post: ''
+  });
+  const [inputs, setInputs] = useState([
+    {
+      post: "hello",
+    },
+    {
+      post: "beaver's are smelly",
+    },
+    {
+      post: "what did you say about beavers??",
+    },
+  ]);
 
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    setInput("")
+    console.log(inputs)
 
-  // const handleSubmit = (e) => {
-  //   e.preventDefault();
-  //   // setInput(e.target.value)
-  //   console.log(input)
-  // };
-  // const handleChange = (e) => {
-  //   setInput((oldPosts) => ({
-  //     ...oldPosts, [e.target.name]: e.target.value
-  //   }))
-  // };
+    addInput(input)
+  };
+  const handleChange = (e) => {
+    setInput((oldPosts) => ({
+      ...oldPosts, [e.target.name]: e.target.value
+    }))
+  };
 
-  // const addInput = text => {
-  //   const newInput = [...inputs, { text}]
+  const addInput = input => {
+    const newInput = [...inputs, input]
+    setInputs(newInput)
+  }
 
-  // }
+  const removeInput = id  => {
+    const removeInput = [...inputs].filter(x => x.id !== id)
+    setInputs(removeInput)
+    console.log("button clicked", id)
+  }
   return (
     <PostContainer>
-      {/* <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit}>
         <Input
           name='post'
           type="textarea"
           placeholder="Post It"
           onChange={handleChange}
-          value={newInputs.post}
+          value={input.post || ""}
         />
-      </form> */}
+      </form>
    
      
-    {/* <PostCard inputs={inputs} /> */}
+      <PostCard input={inputs} removeInput={removeInput}/>
     </PostContainer>
   )
 }
