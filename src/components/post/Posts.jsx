@@ -4,36 +4,40 @@ import styled from 'styled-components'
 
 
 const Posts = (props) => {
-  const [input, setInput] = useState({
-    post: ''
-  });
+  // const [newInput, setNewInput] = useState({
+  //   post: ''
+  // });
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    // setInput(e.target.value)
-    console.log(input)
-  };
-  const handleChange = (e) => {
-    setInput((oldPosts) => ({
-      ...oldPosts, [e.target.name]: e.target.value
-    }))
-  };
 
+  // const handleSubmit = (e) => {
+  //   e.preventDefault();
+  //   // setInput(e.target.value)
+  //   console.log(input)
+  // };
+  // const handleChange = (e) => {
+  //   setInput((oldPosts) => ({
+  //     ...oldPosts, [e.target.name]: e.target.value
+  //   }))
+  // };
+
+  // const addInput = text => {
+  //   const newInput = [...inputs, { text}]
+
+  // }
   return (
     <PostContainer>
-      <form onSubmit={handleSubmit}>
+      {/* <form onSubmit={handleSubmit}>
         <Input
           name='post'
           type="textarea"
           placeholder="Post It"
           onChange={handleChange}
-          
+          value={newInputs.post}
         />
-      </form>
+      </form> */}
    
-
-        <PostCard input={input} />
-    
+     
+    {/* <PostCard inputs={inputs} /> */}
     </PostContainer>
   )
 }
