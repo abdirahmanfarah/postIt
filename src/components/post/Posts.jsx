@@ -7,11 +7,27 @@ const Posts = (props) => {
   const [input, setInput] = useState({
     post: ''
   });
+  const [inputs, setInputs] = useState([
+    {
+      post: "hello",
+    },
+    {
+      post: "beaver's are smelly",
+    },
+    {
+      post: "what did you say about beavers??",
+    },
+  ]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // setInput(e.target.value)
-    console.log(input)
+    setInput("")
+    console.log(inputs)
+    if(!input.post || /^s*$/.test(input.post)){
+      return
+    }
+
+    addInput(input)
   };
   const handleChange = (e) => {
     setInput((oldPosts) => ({
@@ -19,6 +35,18 @@ const Posts = (props) => {
     }))
   };
 
+  const addInput = input => {
+    const newInput = [...inputs, input]
+    setInputs(newInput)
+  }
+
+  const removeInput = id  => {
+    // const removeInput = [...inputs].filter(x => x.id !== id)
+    const removeInput = [...inputs]
+    removeInput.splice(id, 1)
+    setInputs(removeInput)
+    console.log("button clicked", id)
+  }
   return (
     <PostContainer>
       <form onSubmit={handleSubmit}>
@@ -27,13 +55,12 @@ const Posts = (props) => {
           type="textarea"
           placeholder="Post It"
           onChange={handleChange}
-          
+          value={input.post || ""}
         />
       </form>
    
-
-        <PostCard input={input} />
-    
+     
+      <PostCard input={inputs} removeInput={removeInput}/>
     </PostContainer>
   )
 }
