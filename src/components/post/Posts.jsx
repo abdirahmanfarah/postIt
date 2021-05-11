@@ -10,14 +10,18 @@ const Posts = (props) => {
   const [inputs, setInputs] = useState([
     {
       post: "hello",
+      counter: 0
     },
     {
       post: "beaver's are smelly",
+      counter: 0
     },
     {
       post: "what did you say about beavers??",
+      counter: 0
     },
   ]);
+
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -41,11 +45,11 @@ const Posts = (props) => {
   }
 
   const removeInput = id  => {
-    // const removeInput = [...inputs].filter(x => x.id !== id)
-    const removeInput = [...inputs]
-    removeInput.splice(id, 1)
+    const removeInput = [...inputs].filter(x => x !== id)
+    // const removeInput = [...inputs]
+    // removeInput.splice(id, 1)
     setInputs(removeInput)
-    console.log("button clicked", id)
+    console.log("button clicked", id, inputs)
   }
   return (
     <PostContainer>
