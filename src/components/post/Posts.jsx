@@ -45,12 +45,16 @@ const Posts = (props) => {
     setInputs(newInput)
   }
 
-  const removeInput = id  => {
-    const removeInput = [...inputs].filter(x => x !== id)
+  const removeInput = (id) => {
+    const removePost = [...inputs].findIndex(r => r === id)
+    
+    // Trying to delete post after -2 
+
+    const removeInput = [...inputs].filter(x => x !== removePost )
     // const removeInput = [...inputs]
     // removeInput.splice(id, 1)
     setInputs(removeInput)
-    console.log("button clicked", id, inputs)
+    console.log("button clicked", removePost)
   }
 
   const upVote = (id) => {
@@ -64,10 +68,13 @@ const Posts = (props) => {
 
       }
       setInputs(updatedPost)
-      console.log("button clicked",id, postIndex, postToUpdate)
+      
      
   }
   const downVote = (id) => {
+
+    // if()
+
     const postIndex = [...inputs].findIndex(q => q ===id)
     const postToUpdate = inputs[postIndex]
     // const updatedPost = [...inputs, {counter: postToUpdate + 1}]
@@ -77,12 +84,17 @@ const Posts = (props) => {
       counter: postToUpdate.counter - 1
 
     }
-
-
-
+    console.log(updatedPost[postIndex]) 
+    if(updatedPost[postIndex].counter < -2){
+      // let removePost = updatedPost[postIndex]
+      removeInput(updatedPost[postIndex])
+    }else{
+      
+      setInputs(updatedPost)
+    }
  
-    setInputs(updatedPost)
     // console.log("button clicked",id, postIndex, postToUpdate)
+    // console.log("button clicked",id, postToUpdate, updatedPost)
    
 }
 
