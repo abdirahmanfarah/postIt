@@ -10,16 +10,22 @@ const Posts = (props) => {
 
   const [inputs, setInputs] = useState([
     {
+      id: 1,
       post: "hello",
-      counter: 0
+      counter: 0,
+      currentDateTime: Date().toLocaleString()
     },
     {
+      id:2,
       post: "beaver's are smelly",
-      counter: 0
+      counter: 0,
+      currentDateTime: Date().toLocaleString()
     },
     {
+      id:3,
       post: "what did you say about beavers??",
-      counter: 0
+      counter: 0,
+      currentDateTime: Date().toLocaleString()
     },
   ]);
 
@@ -41,20 +47,21 @@ const Posts = (props) => {
   };
 
   const addInput = input => {
-    const newInput = [...inputs, {post:input.post, counter:0}]
+    const newInput = [...inputs, 
+      {
+        id:Math.floor(Math.random() * 10000), 
+        post:input.post, counter:0, 
+        currentDateTime: Date().toLocaleString()}]
     setInputs(newInput)
   }
 
   const removeInput = (id) => {
-    const removePost = [...inputs].findIndex(r => r === id)
-    
-    // Trying to delete post after -2 
-
-    const removeInput = [...inputs].filter(x => x !== removePost )
+   
+    const removeInput = [...inputs].filter(x => x.id !== id)
     // const removeInput = [...inputs]
     // removeInput.splice(id, 1)
     setInputs(removeInput)
-    console.log("button clicked", removePost)
+    console.log("button clicked", id)
   }
 
   const upVote = (id) => {
@@ -84,10 +91,10 @@ const Posts = (props) => {
       counter: postToUpdate.counter - 1
 
     }
-    console.log(updatedPost[postIndex]) 
+    // console.log(updatedPost[postIndex]) 
     if(updatedPost[postIndex].counter < -2){
       // let removePost = updatedPost[postIndex]
-      removeInput(updatedPost[postIndex])
+      removeInput(updatedPost[postIndex].id)
     }else{
       
       setInputs(updatedPost)
@@ -96,6 +103,18 @@ const Posts = (props) => {
     // console.log("button clicked",id, postIndex, postToUpdate)
     // console.log("button clicked",id, postToUpdate, updatedPost)
    
+}
+
+const hotPost = () => {
+  // query inputs arry by posts with the highest counters up top
+  const hotPosts = [...inputs].sort((x, y) => y.counter - x.counter)
+    // console.log(hotPosts)
+  setInputs(hotPosts)
+}
+const newPost = () => {
+    const newPosts = [...inputs].sort((x, y) => x.currentDateTime > y.currentDateTime ? 1: -1)
+    setInputs(newPosts)
+    console.log(newPosts)
 }
 
   return (
@@ -109,7 +128,10 @@ const Posts = (props) => {
           value={input.post || ""}
         />
       </form>
-   
+      <ButtonGroupA>
+        <Button onClick={() => newPost()}> New</Button>
+        <Button onClick={() => hotPost()}>Hot</Button>
+      </ButtonGroupA>
      
       <PostCard input={inputs} removeInput={removeInput} upVote={upVote} downVote={downVote}/>
     </PostContainer>
@@ -120,7 +142,7 @@ export default Posts
 
 const PostContainer = styled.div`
     margin:20px;
-    background:red;
+    // background:red;
     border:1px solid blue;
 
 `
@@ -132,3 +154,16 @@ const Input = styled.input`
   font-size: 1.5rem;
   border:1px solid red;
 `;
+
+const ButtonGroupA = styled.div`
+  display:flex;
+  justify-content:space-around;
+`
+
+const Button = styled.button`
+  padding:10px;
+  font-size:1rem;
+  border: 2px solid palevioletred;
+  border-radius: 3px;
+  color:palevioletred;
+`

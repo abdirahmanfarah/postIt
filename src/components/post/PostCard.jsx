@@ -2,7 +2,7 @@ import React, {useState} from 'react'
 import styled from 'styled-components'
 
 const PostCard = ({input, removeInput, upVote, downVote}) => {
-   console.log(input)
+//    console.log(input)
 // const [count, setCount] = useState(0)
 
 // const upVote = () => {
