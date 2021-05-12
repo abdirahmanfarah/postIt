@@ -1,9 +1,9 @@
 import React, {useState} from 'react'
 import styled from 'styled-components'
 
-const PostCard = ({input, removeInput, counter}) => {
-//    console.log(props)
-const [count, setCount] = useState()
+const PostCard = ({input, removeInput, upVote, downVote}) => {
+   console.log(input)
+// const [count, setCount] = useState(0)
 
 // const upVote = () => {
 //     setCount(...count, {counter + 1})
@@ -13,13 +13,13 @@ const [count, setCount] = useState()
 //     setCount(...count, counter -1)
 // }
 
-const upVote = () => {
-    // const newCount = [...inputs]  Adding in counts is where you left off. 
-    setCount(prevCount => prevCount + 1)
-}
-const downVote = () => {
-    setCount(prevCount => prevCount - 1)
-}
+// const upVote = id => {
+    
+//     console.log("button clicked", id)
+// }
+// const downVote = () => {
+//     setCount(prevCount => prevCount - 1)
+// }
     return (
         <Postcard>
 
@@ -30,9 +30,9 @@ const downVote = () => {
                    {/* <button onClick={() => removeInput(item)}>Remove </button> */}
                    
                     <Votes>
-                        <button onClick={() => upVote()}>UpVote</button>
+                        <button onClick={() => upVote(item)}>UpVote</button>
                         <p>{item.counter}</p>
-                        <button onClick={() => downVote()}>DownVote</button>
+                        <button onClick={() => downVote(item)}>DownVote</button>
                     </Votes>
                </PostContainer>
            ))}

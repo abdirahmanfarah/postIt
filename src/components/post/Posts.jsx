@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import PostCard from './PostCard'
 import styled from 'styled-components'
 
@@ -7,6 +7,7 @@ const Posts = (props) => {
   const [input, setInput] = useState({
     post: ''
   });
+
   const [inputs, setInputs] = useState([
     {
       post: "hello",
@@ -25,7 +26,7 @@ const Posts = (props) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    setInput("")
+    setInput('')
     console.log(inputs)
     if(!input.post || /^s*$/.test(input.post)){
       return
@@ -40,7 +41,7 @@ const Posts = (props) => {
   };
 
   const addInput = input => {
-    const newInput = [...inputs, input]
+    const newInput = [...inputs, {post:input.post, counter:0}]
     setInputs(newInput)
   }
 
@@ -51,6 +52,40 @@ const Posts = (props) => {
     setInputs(removeInput)
     console.log("button clicked", id, inputs)
   }
+
+  const upVote = (id) => {
+      const postIndex = [...inputs].findIndex(q => q ===id)
+      const postToUpdate = inputs[postIndex]
+      // const updatedPost = [...inputs, {counter: postToUpdate + 1}]
+      const updatedPost = [...inputs]
+      updatedPost[postIndex] = {
+        ...postToUpdate,
+        counter: postToUpdate.counter + 1
+
+      }
+      setInputs(updatedPost)
+      console.log("button clicked",id, postIndex, postToUpdate)
+     
+  }
+  const downVote = (id) => {
+    const postIndex = [...inputs].findIndex(q => q ===id)
+    const postToUpdate = inputs[postIndex]
+    // const updatedPost = [...inputs, {counter: postToUpdate + 1}]
+    const updatedPost = [...inputs]
+    updatedPost[postIndex] = {
+      ...postToUpdate,
+      counter: postToUpdate.counter - 1
+
+    }
+
+
+
+ 
+    setInputs(updatedPost)
+    // console.log("button clicked",id, postIndex, postToUpdate)
+   
+}
+
   return (
     <PostContainer>
       <form onSubmit={handleSubmit}>
@@ -64,7 +99,7 @@ const Posts = (props) => {
       </form>
    
      
-      <PostCard input={inputs} removeInput={removeInput}/>
+      <PostCard input={inputs} removeInput={removeInput} upVote={upVote} downVote={downVote}/>
     </PostContainer>
   )
 }
