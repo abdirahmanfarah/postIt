@@ -13,20 +13,20 @@ const Posts = (props) => {
       id: 1,
       post: "hello",
       counter: 0,
-      currentDateTime: Date().toLocaleString()
+      currentDateTime: Date.now(),
     },
     {
       id:2,
       post: "beaver's are smelly",
       counter: 0,
-      currentDateTime: Date().toLocaleString()
+      currentDateTime: Date.now(),
     },
     {
       id:3,
       post: "what did you say about beavers??",
       counter: 0,
-      currentDateTime: Date().toLocaleString()
-    },
+      currentDateTime: Date.now(),
+    }
   ]);
 
 
@@ -51,7 +51,7 @@ const Posts = (props) => {
       {
         id:Math.floor(Math.random() * 10000), 
         post:input.post, counter:0, 
-        currentDateTime: Date().toLocaleString()}]
+        currentDateTime: Date.now()}]
     setInputs(newInput)
   }
 
@@ -92,7 +92,7 @@ const Posts = (props) => {
 
     }
     // console.log(updatedPost[postIndex]) 
-    if(updatedPost[postIndex].counter < -2){
+    if(updatedPost[postIndex].counter < -5){
       // let removePost = updatedPost[postIndex]
       removeInput(updatedPost[postIndex].id)
     }else{
@@ -112,7 +112,7 @@ const hotPost = () => {
   setInputs(hotPosts)
 }
 const newPost = () => {
-    const newPosts = [...inputs].sort((x, y) => x.currentDateTime > y.currentDateTime ? 1: -1)
+    const newPosts = [...inputs].sort((x, y) => y.currentDateTime - x.currentDateTime)
     setInputs(newPosts)
     console.log(newPosts)
 }
@@ -126,6 +126,7 @@ const newPost = () => {
           placeholder="Post It"
           onChange={handleChange}
           value={input.post || ""}
+          minLength = '10'
         />
       </form>
       <ButtonGroupA>
